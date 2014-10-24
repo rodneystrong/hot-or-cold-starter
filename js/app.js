@@ -12,6 +12,19 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+  	/*new game button*/
+  	function newGame() {
+  		$('.new').on('click', function() {
+  			var userGuess = $('#userGuess').val();
+  			console.log(userGuess);
+  		})
+  	};
+  	newGame();
+  	/*feedback to user*/
+  	//var to take user input
+  	//var userGuess = $('#userGuess').val();
+  	//console.log(userGuess);
+
 });
 
 
