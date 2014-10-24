@@ -12,7 +12,7 @@ var theGame = React.createClass({displayName: 'theGame',
 					React.DOM.h2({id: "feedback"}, "Make your Guess!"), 
 
 					React.DOM.form(null, 
-						React.DOM.input({type: "text", name: "userGuess", id: "userGuess", className: "text", maxlength: "3", autocomplete: "off", placeholder: "Enter your Guess", required: true}), 
+						React.DOM.input({type: "text", name: "userGuess", id: "userGuess", className: "text", maxLength: "3", autoComplete: "off", placeholder: "Enter your Guess", required: true}), 
 		      			React.DOM.input({type: "submit", id: "guessButton", className: "button", name: "submit", value: "Guess"})
 					), 
 					
