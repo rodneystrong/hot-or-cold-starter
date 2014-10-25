@@ -14,12 +14,18 @@ $(document).ready(function(){
 
   	/*new game button*/
   	function newGame() {
+  			
+
   		$('.new').on('click', function() {
+  			//generate the random number
+  			var secretNum = Math.floor(Math.random() * (100 - 1));
+
   			//set input field to empty
   			$('#userGuess').val('');
   			
-  		})
+  		});
   	};
+
   	newGame();
   	/*feedback to user*/
   	//var to take user input
