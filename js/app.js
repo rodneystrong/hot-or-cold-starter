@@ -15,8 +15,9 @@ $(document).ready(function(){
   	/*new game button*/
   	function newGame() {
   		$('.new').on('click', function() {
-  			var userGuess = $('#userGuess').val();
-  			console.log(userGuess);
+  			//set input field to empty
+  			$('#userGuess').val('');
+  			
   		})
   	};
   	newGame();
