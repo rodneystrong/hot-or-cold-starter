@@ -15,9 +15,9 @@ $(document).ready(function(){
   	//the user guess
   	var userGuess = +$('#userGuess').val();
   	//the secret number
-  	var secretNum;
+  	var secretNum = Math.floor(Math.random() * (100 - 1));;
 
-  	var guessCount;
+  	var guessCount = 0;
 
 
   	/*new game button*/
@@ -40,12 +40,13 @@ $(document).ready(function(){
   		$('#guessButton').on('click', function() {
   			//unit test
   			//console.log(secretNum);
-  			console.log(typeof(userGuess));
   			if(userGuess < secretNum) {
   				console.log('too low');
+  				return;
   			}
   			if(userGuess > secretNum) {
   				console.log('too high');
+  				return;
   			}
   			else {
   				console.log('correct!');
@@ -56,7 +57,9 @@ $(document).ready(function(){
   	function keepCount() {
   		$('#guessButton').on('click', function() {
   			guessCount += 1;
-  			console.log(guessCount);
+  			//unit test
+  			//console.log(guessCount);
+  			$('#count').text(guessCount);
   		});
   	}
 
