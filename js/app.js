@@ -13,7 +13,7 @@ $(document).ready(function(){
   	});
 
   	//the user guess
-  	var userGuess = parseInt(+$('#userGuess').val());
+  	var userGuess = +$('#userGuess').val();
   	//the secret number
   	var secretNum;
 
