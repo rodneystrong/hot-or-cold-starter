@@ -17,6 +17,8 @@ $(document).ready(function(){
   	//the secret number
   	var secretNum;
 
+  	var guessCount;
+
 
   	/*new game button*/
   	function newGame() {
@@ -51,8 +53,16 @@ $(document).ready(function(){
   		});
   	}
 
+  	function keepCount() {
+  		$('#guessButton').on('click', function() {
+  			guessCount += 1;
+  			console.log(guessCount);
+  		});
+  	}
+
   	newGame();
   	guessFeedback();
+  	keepCount();
   	/*feedback to user*/
   	//var to take user input
   	//var userGuess = $('#userGuess').val();
