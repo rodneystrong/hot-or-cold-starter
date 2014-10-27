@@ -13,24 +13,46 @@ $(document).ready(function(){
   	});
 
   	//the user guess
-  	var userGuess = $('#userGuess').val();
+  	var userGuess = parseInt(+$('#userGuess').val());
+  	//the secret number
+  	var secretNum;
 
 
   	/*new game button*/
   	function newGame() {
   			
-
+  		//new game button function
   		$('.new').on('click', function() {
   			//generate the random number
-  			var secretNum = Math.floor(Math.random() * (100 - 1));
-  			console.log(userGuess);
+  			secretNum = Math.floor(Math.random() * (100 - 1));
+  			//unit test
+  			console.log(secretNum);
+
   			//set input field to empty
-  			//$('#userGuess').val('');
+  			$('#userGuess').val('');
   			
   		});
-  	};
+  	}
+
+  	function guessFeedback() {
+  		$('#guessButton').on('click', function() {
+  			//unit test
+  			//console.log(secretNum);
+  			console.log(typeof(userGuess));
+  			if(userGuess < secretNum) {
+  				console.log('too low');
+  			}
+  			if(userGuess > secretNum) {
+  				console.log('too high');
+  			}
+  			else {
+  				console.log('correct!');
+  			}
+  		});
+  	}
 
   	newGame();
+  	guessFeedback();
   	/*feedback to user*/
   	//var to take user input
   	//var userGuess = $('#userGuess').val();
