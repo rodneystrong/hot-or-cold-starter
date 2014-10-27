@@ -12,6 +12,10 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+  	//the user guess
+  	var userGuess = $('#userGuess').val();
+
+
   	/*new game button*/
   	function newGame() {
   			
@@ -19,9 +23,9 @@ $(document).ready(function(){
   		$('.new').on('click', function() {
   			//generate the random number
   			var secretNum = Math.floor(Math.random() * (100 - 1));
-
+  			console.log(userGuess);
   			//set input field to empty
-  			$('#userGuess').val('');
+  			//$('#userGuess').val('');
   			
   		});
   	};
@@ -33,5 +37,3 @@ $(document).ready(function(){
   	//console.log(userGuess);
 
 });
-
-
