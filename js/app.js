@@ -31,44 +31,45 @@ $(document).ready(function(){
   			console.log(secretNum);
 
   			//set input field to empty
-  			$('#userGuess').val('');
+  			//$('#userGuess').val('');
   			
   		});
   	}
 
+  	/*feedback to users*/
   	function guessFeedback() {
-  		$('#guessButton').on('click', function() {
+  		$('#guessButton').on('click', function(e) {
+  			//prevent the default submit behavior
+  			e.preventDefault()
   			//unit test
   			//console.log(secretNum);
   			if(userGuess < secretNum) {
-  				console.log('too low');
+  				//console.log('too low');
+  				$('#feedback').text('too low');
   				return;
   			}
-  			if(userGuess > secretNum) {
-  				console.log('too high');
+  			else if(userGuess > secretNum) {
+  				$('#feedback').text('too high');
   				return;
   			}
   			else {
-  				console.log('correct!');
+  				$('#feedback').text('correct!');
   			}
   		});
   	}
 
-  	function keepCount() {
   		$('#guessButton').on('click', function() {
   			guessCount += 1;
   			//unit test
   			//console.log(guessCount);
   			$('#count').text(guessCount);
+  			$('#userGuess').focus();
   		});
-  	}
 
   	newGame();
   	guessFeedback();
-  	keepCount();
   	/*feedback to user*/
   	//var to take user input
-  	//var userGuess = $('#userGuess').val();
   	//console.log(userGuess);
 
 });
