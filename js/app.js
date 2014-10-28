@@ -19,6 +19,12 @@ $(document).ready(function(){
 
   	var guessCount = 0;
 
+  	//things to do for new game
+  	//-reset guess field
+  	//-reset guess count
+  	//-focus guess field
+  	//-generate new #
+  	//-
 
   	/*new game button*/
   	function newGame() {
@@ -43,6 +49,9 @@ $(document).ready(function(){
   			e.preventDefault()
   			//unit test
   			//console.log(secretNum);
+  			if(userGuess < 1 || userGuess > 100 || userGuess % 1 !== 0) {
+  				$('#feedback').text('Please enter a whole # between 1 and 100');
+  			}
   			if(userGuess < secretNum) {
   				//console.log('too low');
   				$('#feedback').text('too low');
