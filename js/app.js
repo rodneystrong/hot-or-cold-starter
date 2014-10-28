@@ -12,38 +12,34 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-  	//the secret number
-  	var secretNum = Math.floor(Math.random() * (100 - 1));;
-
-  	var guessCount = 0;
-
   	//things to do for new game
   	//-reset guess field
   	//-reset guess count
   	//-focus guess field
   	//-generate new #
-  	//-
 
-  	/*new game button*/
-  	function newGame() {
-  			
-  		//new game button function
-  		$('.new').on('click', function() {
-  			//generate the random number
-  			secretNum = Math.floor(Math.random() * (100 - 1));
-  			//unit test
-  			console.log(secretNum);
+  	//GLOBALS
 
-  			//set input field to empty
-  			//$('#userGuess').val('');
-  			
-  		});
+  	//the # of guesses
+  	var guessCount = 0;
+
+  	//reset guess field
+  	//set input field to empty
+  	function resetGuess() {
+  		$('#userGuess').val('');
   	}
+
+  	function secretNum() {
+  		randomNum = Math.floor(Math.random() * (100 - 1));
+  		console.log(randomNum + " is the number you web developing cheater");
+  		return randomNum;
+  	}
+
 
   	/*feedback to users*/
   	$('#guessButton').on('click', function(e) {
   		//prevent the default submit behavior
-  		e.preventDefault()
+  		e.preventDefault();
   		//the user guess
   		var userGuess = +$('#userGuess').val();
   		console.log(userGuess);
@@ -52,12 +48,12 @@ $(document).ready(function(){
   		if(userGuess < 1 || userGuess > 100 || userGuess % 1 !== 0) {
   			$('#feedback').text('Please enter a whole # between 1 and 100');
   		}
-  		else if(userGuess < secretNum) {
+  		else if(userGuess < randomNum) {
   			//console.log('too low');
   			$('#feedback').text('too low');
   			return;
   		}
-  		else if(userGuess > secretNum) {
+  		else if(userGuess > randomNum) {
   			$('#feedback').text('too high');
   			return;
   		}
@@ -66,17 +62,27 @@ $(document).ready(function(){
   		}
   	});
 
-  	$('#guessButton').on('click', function() {
-  		guessCount += 1;
-  		//unit test
-  		//console.log(guessCount);
+  	$('#guessButton').onclick = guessCounter;
+
+  	var guessCounter = function() {
+  		guessCount +=1;
   		$('#count').text(guessCount);
   		$('#userGuess').focus();
-  	});
+  	}
 
+  	/*new game button*/
+  	function newGame() {
+  		secretNum();
+  		resetGuess();
+  	}
+
+  	//start new game on initial load
   	newGame();
-  	/*feedback to user*/
-  	//var to take user input
-  	//console.log(userGuess);
 
+  	//new game button function
+  	$('.new').on('click', function() {
+  		secretNum();
+  		resetGuess();
+  		
+  	});
 });
