@@ -56,6 +56,15 @@ $(document).ready(function(){
   		var userGuess = +$('#userGuess').val();
   		console.log(userGuess);
 
+  		guessCount +=1;
+  		$('#count').text(guessCount);
+  		$('#userGuess').focus().select();
+
+  		//append userGuess to the ul#guessList below
+  		var guessList = function() {
+  			$('#guessList').append("<li>" + userGuess + "</li>");
+  		};
+
   		//Make the difference between userGuess and randonNum a positive value
   		var theDifference = Math.abs(userGuess - randomNum);
 
@@ -66,32 +75,37 @@ $(document).ready(function(){
   		}
   		else if(theDifference >= 40) {
   			$('#feedback').text('Cold cold really cold');
+  			guessList();
+  			$('ul#guessList li').last().css('background-color', '#1a4e95');
+  			$('#feedback').css('background-color', '#1a4e95');
   			return;
   		}
   		else if(theDifference > 20 && theDifference < 40) {
   			$('#feedback').text('Just cold');
+  			guessList();
+  			$('ul#guessList li').last().css('background-color', '#1a4e95');
+  			$('#feedback').css('background-color', '#1a4e95');
   			return;
   		}
   		else if(theDifference > 10 &&  theDifference < 20) {
   			$('#feedback').text('Oh man heating up!');
+  			guessList();
+  			$('ul#guessList li').last().css('background-color', '#cc324b');
+  			$('#feedback').css('background-color', '#cc324b');
   			return;
   		}
   		else if(theDifference >= 1 &&  theDifference < 10) {
   			$('#feedback').text('OH MAN you\'re less than 9 away!');
+  			guessList();
+  			$('ul#guessList li').last().css('background-color', '#cc324b');
+  			$('#feedback').css('background-color', '#cc324b');
   			return;
   		}
   		else {
   			$('#feedback').text('WOW YOU GOT IT  *RAAWWRRR*!');
   		}
+
   	});
-
-  	$('#guessButton').onclick = guessCounter;
-
-  	var guessCounter = function() {
-  		guessCount +=1;
-  		$('#count').text(guessCount);
-  		$('#userGuess').focus();
-  	}
 
   	//start new game on initial load
   	newGame();
