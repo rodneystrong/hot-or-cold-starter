@@ -18,7 +18,9 @@ $(document).ready(function(){
   	//-focus guess field
   	//-generate new #
 
+  	//
   	//GLOBALS
+  	//
 
   	//the # of guesses
   	var guessCount = 0;
@@ -29,12 +31,22 @@ $(document).ready(function(){
   		$('#userGuess').val('');
   	}
 
+  	//generete the secret #
   	function secretNum() {
   		randomNum = Math.floor(Math.random() * (100 - 1));
   		console.log(randomNum + " is the number you web developing cheater");
   		return randomNum;
   	}
 
+  	/*new game button*/
+  	function newGame() {
+  		secretNum();
+  		resetGuess();
+  	}
+
+  	//
+  	//EVENTS
+  	//
 
   	/*feedback to users*/
   	$('#guessButton').on('click', function(e) {
@@ -68,12 +80,6 @@ $(document).ready(function(){
   		guessCount +=1;
   		$('#count').text(guessCount);
   		$('#userGuess').focus();
-  	}
-
-  	/*new game button*/
-  	function newGame() {
-  		secretNum();
-  		resetGuess();
   	}
 
   	//start new game on initial load
