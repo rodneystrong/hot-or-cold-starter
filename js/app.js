@@ -102,7 +102,7 @@ $(document).ready(function(){
   			return;
   		}
   		else {
-  			$('#feedback').text('WOW YOU GOT IT  *RAAWWRRR*!');
+  			$('#feedback').text('WOW YOU GOT IT!! Finally jeeez..');
   		}
 
   	});
