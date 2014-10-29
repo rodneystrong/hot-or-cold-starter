@@ -55,22 +55,33 @@ $(document).ready(function(){
   		//the user guess
   		var userGuess = +$('#userGuess').val();
   		console.log(userGuess);
+
+  		//Make the difference between userGuess and randonNum a positive value
+  		var theDifference = Math.abs(userGuess - randomNum);
+
   		//unit test
   		//console.log(secretNum);
   		if(userGuess < 1 || userGuess > 100 || userGuess % 1 !== 0) {
   			$('#feedback').text('Please enter a whole # between 1 and 100');
   		}
-  		else if(userGuess < randomNum) {
-  			//console.log('too low');
-  			$('#feedback').text('too low');
+  		else if(theDifference >= 40) {
+  			$('#feedback').text('Cold cold really cold');
   			return;
   		}
-  		else if(userGuess > randomNum) {
-  			$('#feedback').text('too high');
+  		else if(theDifference > 20 && theDifference < 40) {
+  			$('#feedback').text('Just cold');
+  			return;
+  		}
+  		else if(theDifference > 10 &&  theDifference < 20) {
+  			$('#feedback').text('Oh man heating up!');
+  			return;
+  		}
+  		else if(theDifference >= 1 &&  theDifference < 10) {
+  			$('#feedback').text('OH MAN you\'re less than 9 away!');
   			return;
   		}
   		else {
-  			$('#feedback').text('correct!');
+  			$('#feedback').text('WOW YOU GOT IT  *RAAWWRRR*!');
   		}
   	});
 
