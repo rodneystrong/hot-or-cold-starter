@@ -80,14 +80,14 @@ $(document).ready(function(){
   			$('#feedback').css('background-color', '#1a4e95');
   			return;
   		}
-  		else if(theDifference > 20 && theDifference < 40) {
+  		else if(theDifference >= 20 && theDifference < 40) {
   			$('#feedback').text('Just cold');
   			guessList();
   			$('ul#guessList li').last().css('background-color', '#1a4e95');
   			$('#feedback').css('background-color', '#1a4e95');
   			return;
   		}
-  		else if(theDifference > 10 &&  theDifference < 20) {
+  		else if(theDifference >= 10 &&  theDifference < 20) {
   			$('#feedback').text('Oh man heating up!');
   			guessList();
   			$('ul#guessList li').last().css('background-color', '#cc324b');
