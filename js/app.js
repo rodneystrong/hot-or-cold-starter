@@ -17,6 +17,7 @@ $(document).ready(function(){
   	//-reset guess count
   	//-focus guess field
   	//-generate new #
+  	//-reset feedback
 
   	//
   	//GLOBALS
@@ -112,8 +113,7 @@ $(document).ready(function(){
 
   	//new game button function
   	$('.new').on('click', function() {
-  		secretNum();
-  		resetGuess();
+  		newGame();
   		
   	});
 });
