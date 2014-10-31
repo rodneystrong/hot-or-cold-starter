@@ -1,119 +1,68 @@
+var hotColdApp = {
+	guessCount: 0,
+	secretNum: null
+};
 
-$(document).ready(function(){
-	
-	/*--- Display information modal box ---*/
-  	$(".what").click(function(){
-    	$(".overlay").fadeIn(1000);
-
-  	});
-
-  	/*--- Hide information modal box ---*/
-  	$("a.close").click(function(){
-  		$(".overlay").fadeOut(1000);
-  	});
-
-  	//things to do for new game
-  	//-reset guess field
-  	//-reset guess count
-  	//-focus guess field
-  	//-generate new #
-
-  	//
-  	//GLOBALS
-  	//
-
-  	//the # of guesses
-  	var guessCount = 0;
-
-  	//reset guess field
-  	//set input field to empty
-  	function resetGuess() {
-  		$('#userGuess').val('');
-  	}
-
-  	//generete the secret #
-  	function secretNum() {
-  		randomNum = Math.floor(Math.random() * (100 - 1));
-  		console.log(randomNum + " is the number you web developing cheater");
-  		return randomNum;
-  	}
-
-  	/*new game button*/
-  	function newGame() {
-  		secretNum();
-  		resetGuess();
-  	}
-
-  	//
-  	//EVENTS
-  	//
-
-  	/*feedback to users*/
-  	$('#guessButton').on('click', function(e) {
-  		//prevent the default submit behavior
-  		e.preventDefault();
-  		//the user guess
-  		var userGuess = +$('#userGuess').val();
-  		console.log(userGuess);
-
-  		guessCount +=1;
-  		$('#count').text(guessCount);
-  		$('#userGuess').focus().select();
-
-  		//append userGuess to the ul#guessList below
-  		var guessList = function() {
-  			$('#guessList').append("<li>" + userGuess + "</li>");
-  		};
-
-  		//Make the difference between userGuess and randonNum a positive value
-  		var theDifference = Math.abs(userGuess - randomNum);
-
-  		//unit test
-  		//console.log(secretNum);
-  		if(userGuess < 1 || userGuess > 100 || userGuess % 1 !== 0) {
-  			$('#feedback').text('Please enter a whole # between 1 and 100');
-  		}
-  		else if(theDifference >= 40) {
-  			$('#feedback').text('Cold cold really cold');
-  			guessList();
-  			$('ul#guessList li').last().css('background-color', '#1a4e95');
-  			$('#feedback').css('background-color', '#1a4e95');
-  			return;
-  		}
-  		else if(theDifference >= 20 && theDifference < 40) {
-  			$('#feedback').text('Just cold');
-  			guessList();
-  			$('ul#guessList li').last().css('background-color', '#1a4e95');
-  			$('#feedback').css('background-color', '#1a4e95');
-  			return;
-  		}
-  		else if(theDifference >= 10 &&  theDifference < 20) {
-  			$('#feedback').text('Oh man heating up!');
-  			guessList();
-  			$('ul#guessList li').last().css('background-color', '#cc324b');
-  			$('#feedback').css('background-color', '#cc324b');
-  			return;
-  		}
-  		else if(theDifference >= 1 &&  theDifference < 10) {
-  			$('#feedback').text('OH MAN you\'re less than 9 away!');
-  			guessList();
-  			$('ul#guessList li').last().css('background-color', '#cc324b');
-  			$('#feedback').css('background-color', '#cc324b');
-  			return;
-  		}
-  		else {
-  			$('#feedback').text('WOW YOU GOT IT!! Finally jeeez..');
-  		}
-
-  	});
-
-  	//start new game on initial load
-  	newGame();
-
-  	//new game button function
-  	$('.new').on('click', function() {
-  		secretNum();
-  		resetGuess();
-  		
-  	});
+$(document).ready(function () {
+	$(".what, a.close").click(overlayController);
+	$('.hot-cold-form').on('submit', addGuess);
+	$('.new').on('click', newGame);
+	newGame();
 });
+
+function overlayController() {
+	var fade = $(this).data('fade');
+	$(".overlay")[fade](1000);
+}
+
+function newGame() {
+	hotColdApp.secretNum = generateNum();
+	hotColdApp.guessCount = 0;
+	resetPage();
+}
+
+function generateNum() {
+	return Math.floor(Math.random() * (100 - 1));
+}
+
+function resetPage() {
+	$('#userGuess').val('');
+	$('#count').text(hotColdApp.guessCount);
+	$('#guessList').empty();
+	$('#feedback').text('Make your Guess!').removeClass('cold hot');
+}
+
+function addGuess(e) {
+	e.preventDefault();
+	var guess = parseFloat($('#userGuess').val(), 10);
+	$('#count').text(hotColdApp.guessCount += 1);
+	$('#userGuess').focus().select();
+	checkGuess(guess);
+}
+
+function checkGuess(guess) {
+	var theDifference = Math.abs(guess - hotColdApp.secretNum);
+	if (guess < 1 || guess > 100 || guess % 1 !== 0) {
+		alert('Please enter a whole # between 1 and 100');
+	}
+	else if (theDifference >= 40) {
+		feedback(guess, 'Cold cold really cold', 'cold');
+	}
+	else if (theDifference >= 20 && theDifference < 40) {
+		feedback(guess, 'Just cold', 'cold');
+	}
+	else if (theDifference >= 10 && theDifference < 20) {
+		feedback(guess, 'Oh man heating up!', 'hot');
+	}
+	else if (theDifference >= 1 && theDifference < 10) {
+		feedback(guess, 'OH MAN you\'re less than 9 away!', 'hot');
+	}
+	else {
+		feedback(guess, 'WOW YOU GOT IT!! Finally jeeez..', 'correct');
+	}
+}
+
+function feedback(guess, str, klass) {
+	$('#feedback').text(str).removeClass('cold hot').addClass(klass);
+	$('#guessList').append("<li class="+ klass +">" + guess + "</li>");
+}
