@@ -29,7 +29,7 @@ function resetPage() {
 	$('#userGuess').val('');
 	$('#count').text(hotColdApp.guessCount);
 	$('#guessList').empty();
-	$('#feedback').text('Make your Guess!').removeClass('cold hot');
+	$('#feedback').text('Make your Guess!').removeClass('cold hot correct');
 }
 
 function addGuess(e) {
@@ -63,6 +63,6 @@ function checkGuess(guess) {
 }
 
 function feedback(guess, str, klass) {
-	$('#feedback').text(str).removeClass('cold hot').addClass(klass);
+	$('#feedback').text(str).removeClass('cold hot correct').addClass(klass);
 	$('#guessList').append("<li class="+ klass +">" + guess + "</li>");
 }
